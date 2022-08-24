@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import {useApolloClient} from '@apollo/client'
+import React, {useState} from 'react'
+
+import Locations from './Locations'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [visible, setVisible] = useState(true)
+	const client = useApolloClient()
+	return (
+		<React.Fragment>
+			<button onClick={() => client.resetStore()}  >Reset Store</button>
+			<button onClick={() => setVisible(i => !i)}>Toggle Locations</button>
+			{visible && <Locations />}
+		</React.Fragment>
+	)
 }
 
-export default App;
+export default App
